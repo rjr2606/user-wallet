@@ -13,7 +13,6 @@ public class Wallet {
 	private @Id @GeneratedValue long id;
 	private @NotBlank String username;
 	private @NotBlank String password;
-	private @NotBlank long balance;
 	private @NotBlank boolean loggedIn;
 
 	public Wallet() {
@@ -22,7 +21,6 @@ public class Wallet {
 	public Wallet(@NotBlank String username, @NotBlank String password, @NotBlank long balance) {
 		this.username = username;
 		this.password = password;
-		this.balance = balance;
 		this.loggedIn = false;
 	}
 
@@ -44,14 +42,6 @@ public class Wallet {
 
 	public void setPassword(String password) {
 		this.password = password;
-	}
-
-	public long getBalance() {
-		return balance;
-	}
-
-	public void setBalance(long balance) {
-		this.balance = balance;
 	}
 
 	public boolean isLoggedIn() {
@@ -79,9 +69,10 @@ public class Wallet {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", username=" + username + ", password=" + password + ", balance=" + balance
-				+ ", loggedIn=" + loggedIn + "]";
+		return "Wallet [id=" + id + ", username=" + username + ", password=" + password + ", loggedIn=" + loggedIn
+				+ "]";
 	}
+
 	
 
 }
