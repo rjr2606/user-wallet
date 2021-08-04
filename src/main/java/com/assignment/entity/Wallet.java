@@ -1,78 +1,66 @@
 package com.assignment.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.MapsId;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
-import java.util.Objects;
+
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
+
+import java.util.Date;
 
 @Entity
 @Table(name = "wallet")
 public class Wallet {
-	private @Id @GeneratedValue long id;
-	private @NotBlank String username;
-	private @NotBlank String password;
-	private @NotBlank boolean loggedIn;
+	
+	private @Id long walletId;
+	private @NotBlank double balance;
+	private @NotBlank Date lastUpdated;
 
 	public Wallet() {
 	}
 
-	public Wallet(@NotBlank String username, @NotBlank String password, @NotBlank long balance) {
-		this.username = username;
-		this.password = password;
-		this.loggedIn = false;
+	public Wallet(long walletId, @NotBlank double balance, @NotBlank Date lastUpdated) {
+		this.walletId = walletId;
+		this.balance = balance;
+		this.lastUpdated = lastUpdated;
 	}
 
-	public long getId() {
-		return id;
+	public long getWalletId() {
+		return walletId;
 	}
 
-	public String getUsername() {
-		return username;
+	public void setWalletId(long walletId) {
+		this.walletId = walletId;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public double getBalance() {
+		return balance;
 	}
 
-	public String getPassword() {
-		return password;
+	public void setBalance(double balance) {
+		this.balance = balance;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public Date getLastUpdated() {
+		return lastUpdated;
 	}
 
-	public boolean isLoggedIn() {
-		return loggedIn;
-	}
-
-	public void setLoggedIn(boolean loggedIn) {
-		this.loggedIn = loggedIn;
-	}
-
-	@Override
-	public boolean equals(Object o) {
-		if (this == o)
-			return true;
-		if (!(o instanceof Wallet))
-			return false;
-		Wallet user = (Wallet) o;
-		return Objects.equals(username, user.username) && Objects.equals(password, user.password);
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(id, username, password, loggedIn);
+	public void setLastUpdated(Date lastUpdated) {
+		this.lastUpdated = lastUpdated;
 	}
 
 	@Override
 	public String toString() {
-		return "Wallet [id=" + id + ", username=" + username + ", password=" + password + ", loggedIn=" + loggedIn
-				+ "]";
+		return "Wallet [walletId=" + walletId + ", balance=" + balance + ", lastUpdated=" + lastUpdated + "]";
 	}
 
-	
-
+    
 }

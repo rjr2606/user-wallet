@@ -31,4 +31,10 @@ public class TransferRequest {
 		this.toWalletId = toWalletId;
 	}
 
+	@Override
+	public String toString() {
+		return "TransferRequest [transactionAmount=" + transactionAmount + ", fromWalletId=" + fromWalletId
+				+ ", toWalletId=" + toWalletId + "]";
+	}
+
 }

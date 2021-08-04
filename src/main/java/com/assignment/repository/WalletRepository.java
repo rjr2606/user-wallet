@@ -7,4 +7,8 @@ import com.assignment.entity.Wallet;
 
 @Repository
 public interface WalletRepository extends JpaRepository<Wallet, Long> {
+
+	Wallet findByWalletId(long fromWalletId);
+	
+	
 }

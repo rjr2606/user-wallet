@@ -4,7 +4,8 @@ public class Fee {
 	private double transactionAmount;
 	private double charge;
 	private double commission;
-
+	private double netAmount;
+	
 	public double getTransactionAmount() {
 		return transactionAmount;
 	}
@@ -28,5 +29,21 @@ public class Fee {
 	public void setCommission(double commission) {
 		this.commission = commission;
 	}
+
+	public double getNetAmount() {
+		return netAmount;
+	}
+
+	public void setNetAmount(double netAmount) {
+		this.netAmount = netAmount;
+	}
+
+	@Override
+	public String toString() {
+		return "Fee [transactionAmount=" + transactionAmount + ", charge=" + charge + ", commission=" + commission
+				+ ", netAmount=" + netAmount + "]";
+	}
+	
+	
 
 }

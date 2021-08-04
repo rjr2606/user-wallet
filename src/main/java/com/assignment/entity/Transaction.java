@@ -12,23 +12,42 @@ import javax.validation.constraints.NotBlank;
 @Table(name = "transaction")
 public class Transaction {
 
-	private @Id @GeneratedValue long transId;
+	private @Id @GeneratedValue long id;
+	private @NotBlank String transId;
 	private @NotBlank long walletId;
 	private @NotBlank double transAmount;
 	private @NotBlank double netAmount;
 	private @NotBlank String transType;
 	private @NotBlank double balance;
 	private @NotBlank Date date;
+	private @NotBlank String reversed;
 
 	public Transaction() {
 	}
 
-	public long getTransId() {
+	
+	
+	public Transaction( @NotBlank String transId, @NotBlank long walletId, @NotBlank double transAmount,
+			@NotBlank double netAmount, @NotBlank String transType, @NotBlank double balance, @NotBlank Date date,
+			@NotBlank String reversed) {
+		this.transId = transId;
+		this.walletId = walletId;
+		this.transAmount = transAmount;
+		this.netAmount = netAmount;
+		this.transType = transType;
+		this.balance = balance;
+		this.date = date;
+		this.reversed = reversed;
+	}
+
+
+
+	public String getTransId() {
 		return transId;
 	}
 
-	public void setTransId(long transId) {
-		this.transId = transId;
+	public void setTransId(String string) {
+		this.transId = string;
 	}
 
 	public long getWalletId() {
@@ -78,5 +97,22 @@ public class Transaction {
 	public void setDate(Date date) {
 		this.date = date;
 	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public String getReversed() {
+		return reversed;
+	}
+
+	public void setReversed(String reversed) {
+		this.reversed = reversed;
+	}
+
 
 }

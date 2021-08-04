@@ -24,7 +24,7 @@ public class TransactionController {
 	TransactionService transcationService;
 
 	@GetMapping("/wallet/charges/{amount}")
-	public Fee computeCharges(@Valid @PathVariable long amount) {
+	public Fee computeCharges(@Valid @PathVariable double amount) {
 		return transcationService.computeCharges(amount);
 	}
 	
@@ -34,13 +34,13 @@ public class TransactionController {
 	}
 	
 	@PostMapping("/wallet/transfer")
-	public Transaction transfer(@Valid @RequestBody TransferRequest request) {
+	public Transaction transfer(@Valid @RequestBody TransferRequest request) throws Exception {
 		return transcationService.transerMoney(request);
 	}
 	
 	
 	@PostMapping("/wallet/addMoney")
-	public Transaction addMoney(@Valid @RequestBody AddRequest request) {
+	public Transaction addMoney(@Valid @RequestBody AddRequest request) throws Exception {
 		return transcationService.addMoney(request);
 	}
 }
