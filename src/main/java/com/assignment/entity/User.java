@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+
 import java.util.Objects;
 
 @Entity
@@ -19,9 +20,10 @@ public class User {
 	@SequenceGenerator(name = "userSeq", sequenceName = "user_seq")
 	@Column(name = "id", updatable = false, nullable = false)
 	private long id;
+	
 	private @NotBlank String username;
 	private @NotBlank String password;
-	private @NotBlank boolean loggedIn;
+	private boolean loggedIn;
 
 	public User() {
 	}

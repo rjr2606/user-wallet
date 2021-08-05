@@ -1,10 +1,12 @@
 package com.assignment.controller;
 
-import java.util.List;
-
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,35 +14,43 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.assignment.entity.AddRequest;
-import com.assignment.entity.Fee;
-import com.assignment.entity.Transaction;
 import com.assignment.entity.TransferRequest;
 import com.assignment.service.TransactionService;
 
-
 @RestController
+@Validated
 public class TransactionController {
 	@Autowired
 	TransactionService transcationService;
 
 	@GetMapping("/wallet/charges/{amount}")
-	public Fee computeCharges(@Valid @PathVariable double amount) {
-		return transcationService.computeCharges(amount);
+	public ResponseEntity<?> computeCharges(@Valid @PathVariable @NotNull double amount) {
+          return new ResponseEntity<>(transcationService.computeCharges(amount), HttpStatus.OK);
+	}
+	
+	@PostMapping("/wallet/transfer" )
+	public ResponseEntity<?> transfer(@Valid @RequestBody TransferRequest request) throws Exception {
+		return new ResponseEntity<>(transcationService.transerMoney(request), HttpStatus.OK);
+	}
+	
+	@GetMapping("/wallet/reverse/{transId}")
+	public ResponseEntity<?> reverse(@Valid @PathVariable String transId) throws Exception {
+		return new ResponseEntity<>(transcationService.reverse(transId), HttpStatus.OK);
+	}
+	
+	@PostMapping("/wallet/addMoney")
+	public ResponseEntity<?> addMoney(@Valid @RequestBody AddRequest request) throws Exception {
+		return new ResponseEntity<>(transcationService.addMoney(request), HttpStatus.OK);
 	}
 	
 	@GetMapping("/wallet/history/{walletId}")
-	public List<Transaction> fetchAllTransactions(@Valid @PathVariable long walletId) {
-		return transcationService.fetchAllTransactions(walletId);
+	public ResponseEntity<?> fetchAllTransactions(@Valid @PathVariable long walletId) {
+		return new ResponseEntity<>(transcationService.fetchAllTransactions(walletId), HttpStatus.OK);
 	}
 	
-	@PostMapping("/wallet/transfer")
-	public Transaction transfer(@Valid @RequestBody TransferRequest request) throws Exception {
-		return transcationService.transerMoney(request);
+	@GetMapping("/wallet/inquiry/{transId}")
+	public ResponseEntity<?> fetchTransaction(@Valid @PathVariable String transId) {
+		return new ResponseEntity<>(transcationService.fetchTransactionDetails(transId), HttpStatus.OK);
 	}
 	
-	
-	@PostMapping("/wallet/addMoney")
-	public Transaction addMoney(@Valid @RequestBody AddRequest request) throws Exception {
-		return transcationService.addMoney(request);
-	}
 }

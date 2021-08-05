@@ -6,30 +6,30 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "transaction")
 public class Transaction {
 
 	private @Id @GeneratedValue long id;
-	private @NotBlank String transId;
-	private @NotBlank long walletId;
-	private @NotBlank double transAmount;
-	private @NotBlank double netAmount;
-	private @NotBlank String transType;
-	private @NotBlank double balance;
-	private @NotBlank Date date;
-	private @NotBlank String reversed;
+	private @NotNull String transId;
+	private @NotNull long walletId;
+	private @NotNull double transAmount;
+	private @NotNull double netAmount;
+	private @NotNull String transType;
+	private @NotNull double balance;
+	private @NotNull Date date;
+	private @NotNull String reversed;
 
 	public Transaction() {
 	}
 
 	
 	
-	public Transaction( @NotBlank String transId, @NotBlank long walletId, @NotBlank double transAmount,
-			@NotBlank double netAmount, @NotBlank String transType, @NotBlank double balance, @NotBlank Date date,
-			@NotBlank String reversed) {
+	public Transaction( @NotNull String transId, @NotNull long walletId, @NotNull double transAmount,
+			@NotNull double netAmount, @NotNull String transType, @NotNull double balance, @NotNull Date date,
+			@NotNull String reversed) {
 		this.transId = transId;
 		this.walletId = walletId;
 		this.transAmount = transAmount;
@@ -115,4 +115,13 @@ public class Transaction {
 	}
 
 
+
+	@Override
+	public String toString() {
+		return "Transaction [id=" + id + ", transId=" + transId + ", walletId=" + walletId + ", transAmount="
+				+ transAmount + ", netAmount=" + netAmount + ", transType=" + transType + ", balance=" + balance
+				+ ", date=" + date + ", reversed=" + reversed + "]";
+	}
+
+	
 }
