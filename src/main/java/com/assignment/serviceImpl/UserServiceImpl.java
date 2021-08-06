@@ -3,6 +3,7 @@ package com.assignment.serviceImpl;
 import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.assignment.entity.Status;
 import com.assignment.entity.User;
@@ -23,6 +24,7 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	WalletRepository walletRepository;
 
+	@Transactional
 	public User registerUser(User newUser) {
 		User user = userRepository.findByUsername(newUser.getUsername()); 
 		if (user != null) {

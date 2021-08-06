@@ -14,6 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.assignment.entity.AddRequest;
 import com.assignment.entity.Fee;
@@ -49,6 +50,7 @@ public class TransactionServiceImpl implements TransactionService {
 		return ComputeCharges.senderFee(transactionAmount);
 	}
 
+	@Transactional
 	public TransactionDetails transerMoney(TransferRequest req) throws Exception {
 		Optional<Wallet> sourceWallet, destWallet;
 		TransactionDetails transResponse = null;
@@ -98,6 +100,8 @@ public class TransactionServiceImpl implements TransactionService {
 		}
 	}
 
+	
+	@Transactional
 	public Transaction addMoney(@Valid AddRequest request) throws Exception {
 		Transaction trans = new Transaction();
 
@@ -152,6 +156,7 @@ public class TransactionServiceImpl implements TransactionService {
 		return transactionRepository.findAllByWalletIdOrderByDateDesc(walletId);
 	}
 
+	@Transactional
 	public String reverse(@Valid String transId) throws Exception {
 
 		List<Transaction> transList = transactionRepository.findByTransId(transId);
